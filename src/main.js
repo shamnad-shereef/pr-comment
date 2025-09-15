@@ -1,12 +1,12 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-async function run() {
+export async function run() {
   try {
-    const owner = core.getInput('owner', { required: true })
-    const repo = core.getInput('repo', { required: true })
-    const pr_number = core.getInput('pr_number', { required: true })
-    const token = core.getInput('token', { required: true })
+    const owner = core.getInput('owner') || github.context.repo.owner
+    const repo = core.getInput('repo') || github.context.repo.repo
+    const pr_number = core.getInput('pr_number') || github.context.issue.number
+    const token = core.getInput('token') || core.getInput('github-token')
 
     const octokit = new github.getOctokit(token)
 
@@ -17,7 +17,7 @@ async function run() {
     })
 
     let diffData = {
-      addition: 0,
+      additions: 0,
       deletions: 0,
       changes: 0
     }
@@ -42,9 +42,9 @@ async function run() {
     })
 
     for (const file of changedFiles) {
-      const fileExtention = file.filename.split('.').pop()
+      const fileExtension = file.filename.split('.').pop()
       let label = ''
-      switch (fileExtention) {
+      switch (fileExtension) {
         case 'md':
           label = 'markdown'
           break
@@ -71,5 +71,3 @@ async function run() {
     core.setFailed(error.message)
   }
 }
-
-run()

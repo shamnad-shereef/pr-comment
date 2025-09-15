@@ -6,17 +6,20 @@ author: Shamnad
 inputs:
   owner:
     description: 'The owner of the repo'
-    required: true
+    required: false
   repo:
     description: 'The name of the repo'
-    required: true
+    required: false
   pr_number:
     description: 'The number of the pull request'
-    required: true
+    required: false
   token:
     description: 'The token to use to access the GitHub API'
-    required: true
+    required: false
+  github-token:
+    description: 'Alternative token input for GitHub API'
+    required: false
 
 runs:
-  using: node24
+  using: node20
   main: dist/index.js
