@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
 
-async function run() {
+export async function run() {
   try {
     const owner = core.getInput('owner') || github.context.repo.owner
     const repo = core.getInput('repo') || github.context.repo.repo
@@ -71,5 +71,3 @@ async function run() {
     core.setFailed(error.message)
   }
 }
-
-run()
