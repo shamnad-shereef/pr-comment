@@ -49,8 +49,8 @@ jobs:
         id: checkout
         uses: actions/checkout@v5
 
-       - name: Test Local Action
-         id: test-action
-         uses: ./
-         with:
-           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test Local Action
+        id: test-action
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
