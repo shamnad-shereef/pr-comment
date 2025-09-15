@@ -17,7 +17,7 @@ async function run() {
     })
 
     let diffData = {
-      addition: 0,
+      additions: 0,
       deletions: 0,
       changes: 0
     }
@@ -42,9 +42,9 @@ async function run() {
     })
 
     for (const file of changedFiles) {
-      const fileExtention = file.filename.split('.').pop()
+      const fileExtension = file.filename.split('.').pop()
       let label = ''
-      switch (fileExtention) {
+      switch (fileExtension) {
         case 'md':
           label = 'markdown'
           break
